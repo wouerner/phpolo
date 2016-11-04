@@ -1,6 +1,5 @@
 <?php
-try {
-    $pdo = new \PDO('sqlite:/home/12307444793/dev/phpolo/db.sqlite');
+try { $pdo = new \PDO('sqlite:/home/12307444793/dev/phpolo/db.sqlite');
 }
 catch(\PDOException $e) {
     echo $e->getMessage();
