@@ -26,7 +26,6 @@ class poloniex {
 
         // generate the POST data string
         $post_data = http_build_query($req, '', '&');
-        var_dump($post_data);
         $sign = hash_hmac('sha512', $post_data, $secret);
 
         // generate the extra headers
@@ -52,7 +51,7 @@ class poloniex {
         // run the query
         $res = curl_exec($ch);
 
-        if ($res === false) throw new Exception('Curl error: '.curl_error($ch));
+        if (curl_error($ch)) throw new Exception('Curl error: '.curl_error($ch));
         //echo $res;
         $dec = json_decode($res, true);
         if (!$dec){
@@ -98,8 +97,8 @@ class poloniex {
             array(
                 'command' => 'returnTradeHistory',
                 'currencyPair' => strtoupper($pair),
-                'start' => '1472688000',
-                'end' => '1478279934',
+                'start' => '1420070400',
+                'end' => '1487881793',
             )
         );
     }
@@ -148,7 +147,7 @@ class poloniex {
     //}
 
     public function get_trade_history($pair) {
-        $trades = $this->retrieveJSON($this->public_url.'?command=returnTradeHistory&currencyPair='.strtoupper($pair));
+        $trades = $this->retrieveJSON($this->public_url.'?command=returnTradeHistory&currencyPair='.strtoupper($pair) .'&start=1420070400&end=1487871455');
         return $trades;
     }
 

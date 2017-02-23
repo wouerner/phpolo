@@ -1,6 +1,6 @@
 <?php
 
-include 'config.php';
+include 'config/api.php';
 include 'poloniex.php';
 
 $poloniex = new Poloniex($api_key, $secret);

@@ -1,18 +1,17 @@
 <?php
-try { $pdo = new \PDO('sqlite:/home/12307444793/dev/phpolo/db.sqlite');
-}
-catch(\PDOException $e) {
-    echo $e->getMessage();
-}
 
-include 'config.php';
+include_once('config/db.php');
+
+include 'config/api.php';
 include 'poloniex.php';
 
 $poloniex = new Poloniex($api_key, $secret);
 
 $returnAvailable = $poloniex->returnAvailableAccountBalances();
 
-foreach($returnAvailable['exchange'] as $cur => $balance) {
+
+foreach($returnAvailable['margin'] as $cur => $balance) {
+//foreach($returnAvailable['exchange'] as $cur => $balance) {
     switch($cur) {
         case 'BTC':
             $tradeHistory =   null;
@@ -24,6 +23,7 @@ foreach($returnAvailable['exchange'] as $cur => $balance) {
             $tradeHistory =   $poloniex->get_my_trade_history(  'BTC_' . $cur );
     }
 
+    //$pdo->beginTransaction();
     if($tradeHistory) {
         foreach($tradeHistory as $history) {
             $sql = "INSERT INTO tradeHistory (
@@ -59,6 +59,9 @@ foreach($returnAvailable['exchange'] as $cur => $balance) {
             $stm->bindParam(11, $cur);
 
             $stm->execute();
+            var_dump($stm->errorInfo());
         }
+        //$pdo::commit();
+        sleep(1);
     }
 }
