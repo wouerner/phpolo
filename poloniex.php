@@ -92,13 +92,13 @@ class poloniex {
         //);
     //}
 
-    public function get_my_trade_history($pair) {
+    public function get_my_trade_history($pair, $start = null, $end = null) {
         return $this->query(
             array(
                 'command' => 'returnTradeHistory',
                 'currencyPair' => strtoupper($pair),
-                'start' => '1420070400',
-                'end' => '1487881793',
+                'start' => $start,
+                'end' => $end,
             )
         );
     }
@@ -161,20 +161,20 @@ class poloniex {
         //return $volume;
     //}
 
-    //public function get_ticker($pair = "ALL") {
-        //$pair = strtoupper($pair);
-        //$prices = $this->retrieveJSON($this->public_url.'?command=returnTicker');
-        //if($pair == "ALL"){
-            //return $prices;
-        //}else{
-            //$pair = strtoupper($pair);
-            //if(isset($prices[$pair])){
-                //return $prices[$pair];
-            //}else{
-                //return array();
-            //}
-        //}
-    //}
+    public function get_ticker($pair = "ALL") {
+        $pair = strtoupper($pair);
+        $prices = $this->retrieveJSON($this->public_url.'?command=returnTicker');
+        if($pair == "ALL"){
+            return $prices;
+        }else{
+            $pair = strtoupper($pair);
+            if(isset($prices[$pair])){
+                return $prices[$pair];
+            }else{
+                return array();
+            }
+        }
+    }
 
     //public function get_trading_pairs() {
         //$tickers = $this->retrieveJSON($this->public_url.'?command=returnTicker');
