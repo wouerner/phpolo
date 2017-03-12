@@ -76,7 +76,7 @@ function load($pdo, $api_key, $secret, $currency)
         }
 
     header('Content-Type: application/json');
-    echo json_encode(['success' => true]);
+    echo json_encode(['success' => true, 'error' => $result['error']]);
 }
 
 function eraseData($pdo, $api_key, $secret, $currency = null)
