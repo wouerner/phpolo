@@ -7,13 +7,15 @@ include 'poloniex.php';
 
 $comando = $_GET['comando'];
 $currency = !empty($_GET['currency']) ? $_GET['currency'] : null;
+$dateEnd = !empty($_GET['end']) ? $_GET['end'] : null;
+$dateStart = !empty($_GET['start']) ? $_GET['start'] : null;
 
-function load($pdo, $api_key, $secret, $currency)
+function load($pdo, $api_key, $secret, $currency, $dateStart = null, $dateEnd = null)
 {
-    $dateStart = new DateTime('2016-01-01');
-    $dateEnd = new DateTime('now');
-    $dateStart = $dateStart->getTimestamp();
-    $dateEnd = $dateEnd->getTimestamp();
+    //$dateStart = new DateTime('2016-01-01');
+    //$dateEnd = new DateTime('now');
+    //$dateStart = $dateStart->getTimestamp();
+    //$dateEnd = $dateEnd->getTimestamp();
 
     $result = [];
 
@@ -100,4 +102,4 @@ function eraseData($pdo, $api_key, $secret, $currency = null)
     echo json_encode($result);
 }
 
-$comando($pdo, $api_key, $secret, $currency);
+$comando($pdo, $api_key, $secret, $currency, $dateStart, $dateEnd);
