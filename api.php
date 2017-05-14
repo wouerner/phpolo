@@ -15,6 +15,7 @@ function tradeHistory($pdo, $currency, $type, $category, $fromDate = null, $toDa
 {
     $sql = "
         SELECT
+            globalTradeID,
             date,
             category,
             currency,
