@@ -3,6 +3,10 @@ Header always set Access-Control-Allow-Origin "*"
 Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
 Header always set Access-Control-Max-Age "1000"
 Header always set Access-Control-Allow-Headers "x-requested-with, Content-Type, origin, authorization, accept, client-security-token"
+
+php_flag display_startup_errors on
+php_flag display_errors on
+php_flag html_errors on
  
 # Added a rewrite to respond with a 200 SUCCESS on every OPTIONS request.
 RewriteEngine On
