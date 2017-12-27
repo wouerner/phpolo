@@ -5,6 +5,15 @@ services:
     container_name: phpolo 
     mem_limit: 1g
     volumes:
-     - .:/var/www/phpolo
+     - ./:/var/www/phpolo
      - ./log/:/var/log/apache2
     restart: always
+    networks:
+      static-network:
+        ipv4_address: 172.28.0.3
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+          ip_range: 172.28.5.0/24

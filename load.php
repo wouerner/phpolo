@@ -35,7 +35,7 @@ function load($pdo, $api_key, $secret, $currency, $dateStart = null, $dateEnd = 
             //default:
                 //$tradeHistory =   $poloniex->get_my_trade_history(  'BTC_' . $cur, $dateStart, $dateEnd);
         //}
-
+/* $currency = 'ETH'; */
         $tradeHistory =   $poloniex->get_my_trade_history(  'BTC_' . $currency, $dateStart, $dateEnd);
         if($tradeHistory) {
             foreach($tradeHistory as $history) {

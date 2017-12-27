@@ -88,7 +88,10 @@ function currencies()
     $poloniex = new Poloniex($api_key, $secret);
 
     $returnAvailable = $poloniex->returnAvailableAccountBalances();
-    $currencies = (array_merge($returnAvailable['margin'], $returnAvailable['exchange']));
+    if (isset($returnAvailable['margin'])) {
+         $currencies = (array_merge($returnAvailable['margin'], $returnAvailable['exchange']));
+    }
+    $currencies =  $returnAvailable['exchange'];
 
     header('Content-Type: application/json');
     echo json_encode($currencies);
